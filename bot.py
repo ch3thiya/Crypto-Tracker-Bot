@@ -78,7 +78,6 @@ def track_price_handler(message):
 scheduler = BackgroundScheduler()
 scheduler.start()
 
-# Dictionary to store user thresholds
 user_thresholds = {}
 
 def check_thresholds():
@@ -88,7 +87,6 @@ def check_thresholds():
         if track_price(coin, threshold):
             bot.send_message(user_id, f"🚨 Alert! {coin} price has exceeded ${threshold}!")
 
-# Schedule the function to run every minute
 scheduler.add_job(check_thresholds, 'interval', minutes=10)
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith("track_"))
